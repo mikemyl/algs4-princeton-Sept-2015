@@ -34,7 +34,7 @@ public class Percolation {
      */
     public Percolation(int N) {
         if (N <= 0)
-            throw new IndexOutOfBoundsException();
+            throw new IllegalArgumentException();
         size = N;
         weightedQuickUF = new WeightedQuickUnionUF(N * N + 2);
         grid = new boolean[size][size];

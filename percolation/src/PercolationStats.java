@@ -38,6 +38,25 @@ public class PercolationStats {
     public PercolationStats(int N, int T) {
         if (N <= 0 || T <= 0)
             throw new IllegalArgumentException();
+        x = new double[T];
+        runExperiments(N, T);
+    }
+
+    private void runExperiments(int n, int t) {
+        for (int i = 0; i < t; i++) {
+            Percolation grid = new Percolation(n);
+            int openSites = 0;
+            while (!grid.percolates()) {
+                int y = StdRandom.uniform(1, n+1);
+                int z = StdRandom.uniform(1, n+1);
+                if (grid.isOpen(z, y))
+                    continue;
+                grid.open(z, y);
+                openSites++;
+            }
+            x[i] = (double) openSites / (n*n);
+        }
+        
     }
 
     /**
@@ -81,21 +100,6 @@ public class PercolationStats {
         int N = StdIn.readInt();
         int T = StdIn.readInt();
         PercolationStats stats = new PercolationStats(N, T);
-        stats.x = new double[T];
-
-        for (int i = 0; i < T; i++) {
-            Percolation grid = new Percolation(N);
-            int openSites = 0;
-            while (!grid.percolates()) {
-                int x = StdRandom.uniform(1, N+1);
-                int y = StdRandom.uniform(1, N+1);
-                if (grid.isOpen(x, y))
-                    continue;
-                grid.open(x, y);
-                openSites++;
-            }
-            stats.x[i] = (double) openSites / (N*N);
-        }
         StdOut.println("mean\t\t\t= " + stats.mean());
         StdOut.println("stddev\t\t\t= " + stats.stddev());
         StdOut.println("95% confidence interval\t= " + stats.confidenceLo()
