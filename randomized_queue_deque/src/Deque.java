@@ -30,14 +30,14 @@ public class Deque<Item> implements Iterable<Item> {
     private int size = 0;
 
     private class Node {
+        
+        private Item item;
+        private Node next;
+        private Node prev; 
 
         private Node(Item item) {
             this.item = item;
         }
-
-        Item item;
-        Node next;
-        Node prev;
     }
 
     /**
@@ -186,6 +186,11 @@ public class Deque<Item> implements Iterable<Item> {
 
     }
 
+    /**
+     * Simple Test Client for the Deque class
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         Deque<Integer> deque = new Deque<>();
 
