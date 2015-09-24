@@ -75,6 +75,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int randomIndex = StdRandom.uniform(index);
         Item item = queue[randomIndex];
         queue[randomIndex] = queue[--index];
+        queue[index] = null;
         if (index > 0 && index == queue.length / 4)
             resizeArray(queue.length / 2);
         return item;
