@@ -1,4 +1,6 @@
-**/target
+target/
+bin/
+resources/
 **/.classpath
 **/.project
 **/.settings/
