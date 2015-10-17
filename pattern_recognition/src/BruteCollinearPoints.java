@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /******************************************************************************
  * Compilation: javac Point.java
@@ -16,9 +17,24 @@ public class BruteCollinearPoints {
     private ArrayList<LineSegment> lineSegments;
 
     public BruteCollinearPoints(Point[] points) {
+        if (points == null)
+            throw new NullPointerException();
+        Point[] tmp = new Point[points.length];
+        for (int i = 0; i < points.length; i++) {
+            if (points[i] == null)
+                throw new NullPointerException();
+            tmp[i] = points[i];
+        }
+        Arrays.sort(tmp);
+        Point prev = tmp[0];
+        for (int i = 1; i < tmp.length; i++) {
+            if (tmp[i].compareTo(prev) == 0)
+                throw new IllegalArgumentException();
+            prev = tmp[i];
+        }
         this.lineSegments = new ArrayList<LineSegment>();
-        for (int i=0; i<points.length; i++) {
-            for (int j=i+1; j<points.length; j++) {
+        for (int i = 0; i < points.length; i++) {
+            for (int j = i + 1; j < points.length; j++) {
                 Point[] collinear = new Point[4];
                 collinear[0] = points[i];
                 collinear[1] = points[j];
@@ -34,10 +50,10 @@ public class BruteCollinearPoints {
                 }
                 int collinears = 2;
                 double slope = points[i].slopeTo(points[j]);
-                for (int k=j+1; k<points.length; k++) {
+                for (int k = j + 1; k < points.length; k++) {
                     if (points[i].slopeTo(points[k]) == slope) {
                         collinear[collinears++] = points[k];
-                        if (points[k].compareTo(min) < 0 )
+                        if (points[k].compareTo(min) < 0)
                             min = points[k];
                         else if (points[k].compareTo(max) > 0)
                             max = points[k];
@@ -49,7 +65,10 @@ public class BruteCollinearPoints {
                 }
             }
         }
-        
+    }
+    
+    public int numberOfSegments() {
+        return lineSegments.size();
     }
 
     public LineSegment[] segments() {

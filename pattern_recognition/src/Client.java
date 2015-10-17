@@ -30,6 +30,6 @@ public class Client {
             StdOut.println(segment);
             segment.draw();
         }
-
+        StdOut.println("\n\n\n Number of Segments: " + collinear.numberOfSegments());
     }
 }

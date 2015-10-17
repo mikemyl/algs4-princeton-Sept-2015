@@ -62,6 +62,8 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         /* YOUR CODE HERE */
+        if (that == null)
+            throw new NullPointerException();
         if (this.y == that.y) {
             if (this.x == that.x)
                 return Double.NEGATIVE_INFINITY;
@@ -69,10 +71,10 @@ public class Point implements Comparable<Point> {
         } else {
             if (this.x == that.x)
                 return Double.POSITIVE_INFINITY;
-            double x = this.y - that.y;
-            double y = this.x - that.x;
-            double slope = x/y;
-            return Math.abs(slope);
+            double xi = this.y - that.y;
+            double yi = this.x - that.x;
+            double slope = xi / yi;
+            return slope;
         }
     }
 
@@ -89,6 +91,8 @@ public class Point implements Comparable<Point> {
      *         argument point
      */
     public int compareTo(Point that) {
+        if (that == null)
+            throw new NullPointerException();
         if (this.y < that.y)
             return -1;
         else if (this.y == that.y) {
@@ -115,6 +119,8 @@ public class Point implements Comparable<Point> {
 
             @Override
             public int compare(Point o1, Point o2) {
+                if (o1 == null || o2 == null)
+                    throw new NullPointerException();
                 if (point.slopeTo(o1) < point.slopeTo(o2))
                     return -1;
                 else if (point.slopeTo(o1) > point.slopeTo(o2))
@@ -140,19 +146,11 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-       Point a = new Point(10000,0);
-       Point b = new Point(0,10000);
-       Point c = new Point(3000,7000);
-       Point d = new Point(7000,3000);
-       Point e = new Point(20000,21000);
-       Point f = new Point(3000,4000);
-       Point g = new Point(14000,15000);
-       Point h = new Point(6000,7000);
+       Point a = new Point(23000, 8500);
+       Point b = new Point(21900, 9600);
+
        
-       StdOut.println(a.slopeTo(d));
-       StdOut.println(a.slopeTo(c));
-       StdOut.println(a.slopeTo(b));
-       StdOut.println(a.slopeTo(h));
+       StdOut.println(a.compareTo(b));
 
     }
 }
