@@ -1,6 +1,9 @@
-**/target
-**/.classpath
-**/.project
-**/.settings/
-**/.class
-**/.txt
+target/
+bin/
+resources/
+.classpath
+.project
+.settings/
+*.class
+*.txt
+*.zip
