@@ -4,6 +4,8 @@ resources/
 .classpath
 .project
 .settings/
+.metadata/
 *.class
 *.txt
 *.zip
+*.png
